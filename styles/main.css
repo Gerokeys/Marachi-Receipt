@@ -53,7 +53,8 @@ body {
 .quotation-header .name {
   max-width: 40ch;
   margin-left: -32px;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
+  line-height: 1;
   
 }
 
@@ -61,7 +62,7 @@ body {
   text-align: center;
   padding: 20px;
   font-size: 25px;
-  font-weight: 500;
+  font-weight: bolder;
 }
 
 .quotation-header h1 {
@@ -95,7 +96,7 @@ body {
   border: none;
   outline: none;
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .form {
@@ -105,6 +106,9 @@ body {
   margin-bottom: 20px;
 }
 
+/* Keep the styles the same, remove any classes or IDs that are now unnecessary */
+/* e.g., remove measurements, quantity, and unit price styling as these fields no longer exist */
+
 .form input {
   padding: 10px;
   border: 1px solid #696969;
@@ -112,6 +116,9 @@ body {
   width: 100%; /* Full width for mobile view */
   max-width: 300px; /* Set a max-width for larger screens */
 }
+
+/* Remove styles specifically for measurements, quantity, and unit price */
+
 
 button {
   padding: 10px 20px;

@@ -9,40 +9,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addItem = function () {
     const description = document.getElementById("description").value;
-    const measurements = document.getElementById("measurements").value;
-    const quantity = parseInt(document.getElementById("quantity").value);
-    const unitPrice = parseFloat(document.getElementById("unitPrice").value);
+    const total = parseFloat(document.getElementById("totalPrice").value);
 
-    if (description && measurements && quantity > 0 && unitPrice > 0) {
-      const total = quantity * unitPrice;
+    if (description && total > 0) {
       subtotal += total; // Add to subtotal
-
       itemCount++;
 
       const row = document.createElement("tr");
       row.innerHTML = `
                 <td>${itemCount}</td>
                 <td>${description}</td>
-                <td>${""}</td>
-                <td>${""}</td>
-                <td>${""}</td>
                 <td>${total.toLocaleString()}</td>
             `;
 
       tableBody.appendChild(row);
 
-      // Update subtotal
+      // Update subtotal and grand total
       subtotalEl.textContent = subtotal.toLocaleString();
-
-      // Update grand total
-      grandTotal = subtotal; // Update grand total (here you can add tax, etc., if needed)
+      grandTotal = subtotal;
       grandTotalEl.textContent = grandTotal.toLocaleString();
 
       // Clear input fields
       document.getElementById("description").value = "";
-      document.getElementById("measurements").value = "";
-      document.getElementById("quantity").value = "";
-      document.getElementById("unitPrice").value = "";
+      document.getElementById("totalPrice").value = "";
     } else {
       alert("Please fill in all fields with valid information.");
     }
@@ -60,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .from(element)
       .set({
         margin: [10, 10, 10, 10],
-        filename: "Quotation_Marachi_Metal_Fabricators.pdf",
+        filename: "Invoice_Marachi_Metal_Fabricators.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
@@ -69,21 +58,35 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(() => {
         formSection.style.display = "flex";
         addItemButton.style.display = "block";
+        
+        // Clear table and reset fields after download
+        clearPage();
       });
   };
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+  function clearPage() {
+    // Clear the table body
+    tableBody.innerHTML = "";
+
+    // Reset counters and totals
+    subtotal = 0;
+    grandTotal = 0;
+    itemCount = 0;
+    subtotalEl.textContent = "0.00";
+    grandTotalEl.textContent = "0.00";
+
+    // Clear input fields
+    document.getElementById("description").value = "";
+    document.getElementById("totalPrice").value = "";
+    document.getElementById("clientName").value = "";
+    document.getElementById("projectDesc").value = "";
+  }
+
+  // Set current date
   const dateElement = document.getElementById("currentDate");
-
-  // Create a new Date object
   const today = new Date();
-
-  // Format the date as YYYY-MM-DD (or customize it as needed)
   const formattedDate = today.getFullYear() + "-" + 
                         String(today.getMonth() + 1).padStart(2, '0') + "-" + 
                         String(today.getDate()).padStart(2, '0');
-
-  // Display the date in the element
   dateElement.textContent = formattedDate;
 });

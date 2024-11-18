@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: #f4f4f4;
+}
+
+@font-face {
+  font-family: "coolvetica";
+  src: url(/assets/coolvetica/coolvetica\ condensed\ rg.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f4f4;
+}
+
+.quotation-container {
+  width: 98%;
+  max-width: 1200px; /* Set a max-width for larger screens */
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 14px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.quotation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  padding-bottom: 10px;
+}
+
+.dealers {
+  border-bottom: 2px solid #cd0e3d;
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.quotation-header .name {
+  max-width: 40ch;
+  margin-left: -32px;
+  letter-spacing: 2px;
+  line-height: 1;
+  
+}
+
+.word {
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.quotation-header h1 {
+  font-family: "coolvetica";
+  font-size: 3em;
+  font-weight: 600;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.logo p {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.quotation-details {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.quotation-details h2 {
+  font-size: 1em;
+}
+
+.quotation-details input {
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Keep the styles the same, remove any classes or IDs that are now unnecessary */
+/* e.g., remove measurements, quantity, and unit price styling as these fields no longer exist */
+
+.form input {
+  padding: 10px;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  width: 100%; /* Full width for mobile view */
+  max-width: 300px; /* Set a max-width for larger screens */
+}
+
+/* Remove styles specifically for measurements, quantity, and unit price */
+
+
+button {
+  padding: 10px 20px;
+  background-color: #af4c51;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #830606;
+}
+
+#quotationTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 100px;
+}
+
+#quotationTable th {
+  font-size: 0.8em;
+}
+
+#quotationTable th,
+#quotationTable td {
+  border: 1px solid #5a0707;
+  padding: 10px;
+  text-align: left;
+}
+
+#quotationTable th {
+  background-color: #830606;
+  color: white;
+}
+
+.quotation-total {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+/* Additional styling for the download button */
+#downloadBtn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #5a0707;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#downloadBtn:hover {
+  background-color: #66162a;
+}
+
+.construction-details {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.construction-details label {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.details-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.details-section div {
+  width: 45%;
+}
+
+.details-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.details-section p {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.client-name {
+  padding: 5px 0;
+}
+
+.client-name input,
+.project-description textarea {
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 700;
+}
+.project-description textarea {
+  font-size: 1.3em;
+}
+
+.project-description {
+  display: flex;
+  gap: 5px;
+}
+
+/* Foooter sectoion */
+
+footer {
+  margin-top: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer h3 {
+  font-size: 1em;
+}
+
+footer p {
+  font-size: 0.9em;
+}
+
+.grand {
+  background-color: #830606;
+  color: white;
+}
+
+.signed {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot img {
+  width: 60px;
+}

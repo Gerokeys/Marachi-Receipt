@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice - Marachi Metal Fabricators and Welders</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="quotationContent" class="quotation-container">
+      <header class="quotation-header">
+        <div class="name">
+          <h1>Marachi Welding <br>And Fabrication</h1>
+        </div>
+        <div class="logo">
+          <img src="./assets/logo.jpeg" alt="Company Logo" />
+          <p>Welding Your Future</p>
+        </div>
+      </header>
+      <p class="dealers">
+        Specialist dealers of all types of steel structures, Metal Fabricated
+        Kiosks, Gates, Grills, Doors, windows, Water tanks, water towers,
+        WheelBarrows & all general metal engineering fabricated works
+        Contractors etc
+      </p>
+      <h2 class="word">RECEIPT</h2>
+      <div class="quotation-details">
+        <div class="quotation-number">
+          <h2>Receipt Number:</h2>
+          <input
+            required
+            type="text"
+            id="invoiceNumber"
+            placeholder="Enter Receipt number"
+          />
+        </div>
+        <div class="quotation-date">
+          <h2>Receipt date:</h2>
+          <p><span id="currentDate"></span></p>
+        </div>
+        <div class="company-details">
+          <h2>Company Details:</h2>
+          <p>Mla Chake, Ruiru, 1799</p>
+          <p><strong>Contact:</strong> 0721627387</p>
+          <p>
+            <strong>Website:</strong><a href="#">marachifabrications.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="construction-details">
+        <h2>Construction Details</h2>
+        <div class="client-name">
+          <label for="clientName">Client's Name:</label>
+          <input
+            required
+            type="text"
+            id="clientName"
+            placeholder="Enter client's name"
+          />
+        </div>
+        <div class="project-description">
+          <label for="projectDesc">Project Description:</label>
+          <textarea
+            required
+            id="projectDesc"
+            placeholder="Enter project description"
+            style="width: 50%"
+          ></textarea>
+        </div>
+      </div>
+
+      <section class="quotation-table">
+        <div class="form">
+          <input type="text" id="description" placeholder="Item Description" />
+          <input type="number" id="totalPrice" placeholder="Total Price (Ksh)" />
+        </div>
+
+        <table id="quotationTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item Description</th>
+              <th>Total (Ksh)</th>
+            </tr>
+          </thead>
+          <tbody id="predefinedRows">
+            <!-- Predefined empty rows for spacing or additional rows -->
+          </tbody>
+        </table>
+
+        <button onclick="addItem()">Add Item</button>
+      </section>
+
+      <footer class="footer">
+        <div class="terms">
+          <h3>Terms & Conditions</h3>
+          <p>This Invoice is valid for 30 days from the above mentioned date.</p>
+          <p>Please do not hesitate to contact us should you have any questions.</p>
+          <div class="sign">
+            <p><strong>Prepared BY: ERICK M. OCHIENG:</strong></p>
+            <div class="signed">
+              <p><strong>Signed</strong></p>
+              <div class="dot">
+                <img src="./assets/Picture.png" alt="" />
+                <p><strong>.........................</strong></p>
+              </div>
+            </div>
+            <p><strong>KRA PIN: A004195051M</strong></p>
+          </div>
+        </div>
+        <div class="quotation-total">
+          <p><strong>SUBTOTAL:</strong> <span id="subtotal">0.00</span></p>
+          <p><strong>TAX @ 0%:</strong> <span id="subtotal">0.00</span></p>
+          <p class="grand"><strong>TOTAL:</strong> <span id="grandTotal">0.00</span></p>
+        </div>
+      </footer>
+    </div>
+
+    <button id="downloadBtn" onclick="downloadQuotation()">
+      Download Invoice as PDF
+    </button>
+    <button id="downloadBtn" onclick="downloadWordQuotation()">Download as Word</button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -16,7 +16,7 @@
     <div id="quotationContent" class="quotation-container">
       <header class="quotation-header">
         <div class="name">
-          <h1>Marachi Welding <br>And Fabrication</h1>
+          <h1>Marachi Welding <br />And Fabrication</h1>
         </div>
         <div class="logo">
           <img src="./assets/logo.jpeg" alt="Company Logo" />
@@ -29,24 +29,26 @@
         WheelBarrows & all general metal engineering fabricated works
         Contractors etc
       </p>
-      <h2 class="word">INVOICE</h2>
+      <h2 class="word">RECEIPT</h2>
       <div class="quotation-details">
         <div class="quotation-number">
-          <h2>Invoice Number:</h2>
+          <h2>Receipt Number:</h2>
           <input
             required
             type="text"
             id="invoiceNumber"
-            placeholder="Enter Invoice number"
+            placeholder="Enter Receipt number"
           />
         </div>
         <div class="quotation-date">
-          <h2>Invoice date:</h2>
+          <h2>Receipt date:</h2>
           <p><span id="currentDate"></span></p>
         </div>
         <div class="company-details">
           <h2>Company Details:</h2>
-          <p>Mla Chake, Ruiru, 1799</p>
+          <p>
+            Along Ruiru-Kiambu road, opposite the affordable housing buildings
+          </p>
           <p><strong>Contact:</strong> 0721627387</p>
           <p>
             <strong>Website:</strong><a href="#">marachifabrications.com</a>
@@ -79,7 +81,11 @@
       <section class="quotation-table">
         <div class="form">
           <input type="text" id="description" placeholder="Item Description" />
-          <input type="number" id="totalPrice" placeholder="Total Price (Ksh)" />
+          <input
+            type="number"
+            id="totalPrice"
+            placeholder="Total Price (Ksh)"
+          />
         </div>
 
         <table id="quotationTable">
@@ -101,8 +107,12 @@
       <footer class="footer">
         <div class="terms">
           <h3>Terms & Conditions</h3>
-          <p>This Invoice is valid for 30 days from the above mentioned date.</p>
-          <p>Please do not hesitate to contact us should you have any questions.</p>
+          <p>
+            This Invoice is valid for 30 days from the above mentioned date.
+          </p>
+          <p>
+            Please do not hesitate to contact us should you have any questions.
+          </p>
           <div class="sign">
             <p><strong>Prepared BY: ERICK M. OCHIENG:</strong></p>
             <div class="signed">
@@ -118,7 +128,9 @@
         <div class="quotation-total">
           <p><strong>SUBTOTAL:</strong> <span id="subtotal">0.00</span></p>
           <p><strong>TAX @ 0%:</strong> <span id="subtotal">0.00</span></p>
-          <p class="grand"><strong>TOTAL:</strong> <span id="grandTotal">0.00</span></p>
+          <p class="grand">
+            <strong>TOTAL:</strong> <span id="grandTotal">0.00</span>
+          </p>
         </div>
       </footer>
     </div>
@@ -126,8 +138,12 @@
     <button id="downloadBtn" onclick="downloadQuotation()">
       Download Invoice as PDF
     </button>
+    <button id="downloadBtn" onclick="downloadWordQuotation()">
+      Download as Word
+    </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

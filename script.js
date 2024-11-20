@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const total = parseFloat(document.getElementById("totalPrice").value);
 
     if (description && total > 0) {
-      subtotal += total; // Add to subtotal
+      subtotal += total;
       itemCount++;
 
       const row = document.createElement("tr");
@@ -24,12 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tableBody.appendChild(row);
 
-      // Update subtotal and grand total
       subtotalEl.textContent = subtotal.toLocaleString();
       grandTotal = subtotal;
       grandTotalEl.textContent = grandTotal.toLocaleString();
 
-      // Clear input fields
       document.getElementById("description").value = "";
       document.getElementById("totalPrice").value = "";
     } else {
@@ -58,31 +56,72 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(() => {
         formSection.style.display = "flex";
         addItemButton.style.display = "block";
-        
-        // Clear table and reset fields after download
         clearPage();
       });
   };
 
-  function clearPage() {
-    // Clear the table body
-    tableBody.innerHTML = "";
+  // Download Word Document Function
+  window.downloadWordQuotation = function () {
+    const { Document, Packer, Paragraph, TextRun } = window.docx; // Use docx from the global window
 
-    // Reset counters and totals
+    const doc = new Document({
+      sections: [
+        {
+          children: [
+            new Paragraph({
+              children: [new TextRun("Quotation - Marachi Metal Fabricators")],
+              heading: "Heading1",
+            }),
+            new Paragraph({
+              children: [new TextRun(`Date: ${formattedDate}`)],
+            }),
+            new Paragraph({
+              children: [new TextRun(`Subtotal: ${subtotalEl.textContent}`)],
+            }),
+            new Paragraph({
+              children: [new TextRun(`Grand Total: ${grandTotalEl.textContent}`)],
+            }),
+            new Paragraph({
+              text: "\nItems:",
+              spacing: { after: 200 },
+            }),
+          ],
+        },
+      ],
+    });
+
+    // Add items from the table to the Word document
+    tableBody.querySelectorAll("tr").forEach((row, index) => {
+      const columns = row.querySelectorAll("td");
+      const itemText = `${columns[0].textContent}. ${columns[1].textContent} - Ksh ${columns[2].textContent}`;
+      doc.addSection({
+        children: [new Paragraph({ text: itemText })],
+      });
+    });
+
+    // Generate and download the Word document
+    Packer.toBlob(doc).then((blob) => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Quotation_Marachi_Metal_Fabricators.docx";
+      link.click();
+    });
+  };
+
+  function clearPage() {
+    tableBody.innerHTML = "";
     subtotal = 0;
     grandTotal = 0;
     itemCount = 0;
     subtotalEl.textContent = "0.00";
     grandTotalEl.textContent = "0.00";
 
-    // Clear input fields
     document.getElementById("description").value = "";
     document.getElementById("totalPrice").value = "";
     document.getElementById("clientName").value = "";
     document.getElementById("projectDesc").value = "";
   }
 
-  // Set current date
   const dateElement = document.getElementById("currentDate");
   const today = new Date();
   const formattedDate = today.getFullYear() + "-" + 

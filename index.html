@@ -14,137 +14,143 @@
   </head>
   <body>
     <div id="quotationContent" class="quotation-container">
+      <div class="paid-stamp">PAID</div>
       <header class="quotation-header">
         <div class="name">
-          <img src="assets/header.png" alt="header" />
+          <img src="assets/header.png" alt="Marachi Metal Fabricators & Welders" />
         </div>
         <div class="logo">
           <img src="./assets/logo.jpeg" alt="Company Logo" />
           <p>Welding Your Future</p>
         </div>
       </header>
+
       <p class="dealers">
         Specialist dealers of all types of steel structures, Metal Fabricated
-        Kiosks, Gates, Grills, Doors, windows, Water tanks, water towers,
-        WheelBarrows & all general metal engineering fabricated works
-        Contractors etc
+        Kiosks, Gates, Grills, Doors, Windows, Water Tanks, Water Towers,
+        Wheelbarrows &amp; all general metal engineering fabricated works &amp; Contractors.
       </p>
-      <h2 class="word">RECEIPT</h2>
-      <div class="quotation-details">
-        <div class="quotation-number">
-          <h2>Receipt Number:</h2>
-          <input
-            required
-            type="text"
-            id="invoiceNumber"
-            placeholder="Enter Receipt number"
-          />
-        </div>
-        <div class="quotation-date">
-          <h2>Receipt date:</h2>
-          <p><span id="currentDate"></span></p>
-        </div>
-        <div class="company-details">
-          <h2>Company Details:</h2>
-          <p>
-            Along Ruiru-Kamiti road,<br />
-            Opposite the affordable housing buildings
-          </p>
-          <p><strong>Contact:</strong> 0721672387</p>
-          <p>
-            <strong>Website:</strong><a href="#">marachifabrications.com</a>
-          </p>
-        </div>
-      </div>
 
-      <div class="construction-details">
-        <h2>Construction Details</h2>
-        <div class="client-name">
-          <label for="clientName">Client's Name:</label>
-          <input
-            required
-            type="text"
-            id="clientName"
-            placeholder="Enter client's name"
-          />
+      <h2 class="word">RECEIPT</h2>
+
+      <div class="quotation-details">
+        <div class="details-left">
+          <div class="details-row">
+            <span class="detail-label">Receipt No.:</span>
+            <input type="text" id="invoiceNumber" placeholder="e.g. R-001" />
+          </div>
+          <div class="details-row">
+            <span class="detail-label">Date:</span>
+            <span id="currentDate"></span>
+          </div>
+          <div class="delivered-to">
+            <span class="section-label">BILLED TO:</span>
+            <div class="details-row">
+              <span class="detail-label">Client:</span>
+              <input type="text" id="clientName" placeholder="Client's full name" />
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Project:</span>
+              <input type="text" id="projectDesc" placeholder="Brief project description" />
+            </div>
+          </div>
         </div>
-        <div class="project-description">
-          <label for="projectDesc">Project Description:</label>
-          <textarea
-            required
-            id="projectDesc"
-            placeholder="Enter project description"
-            style="width: 50%"
-          ></textarea>
+        <div class="details-right">
+          <span class="from-label">FROM:</span>
+          <p><strong>Marachi Metal Fabricators &amp; Welders</strong></p>
+          <p>Along Ruiru-Kamiti Road,</p>
+          <p>Opposite the affordable housing buildings</p>
+          <p>Tel: 0721672387</p>
+          <p>Paybill: 4974366</p>
+          <p>marachifabrications.com</p>
+          <p>KRA PIN: A004195051M</p>
         </div>
       </div>
 
       <section class="quotation-table">
-        <div class="form">
-          <input type="text" id="description" placeholder="Item Description" />
-          <input
-            type="number"
-            id="totalPrice"
-            placeholder="Total Price (Ksh)"
-          />
+        <div class="add-item-section">
+          <span class="add-item-label">&#x276F; ADD A LINE ITEM:</span>
+          <div class="form-row">
+            <input type="text" id="description" placeholder="Item Description" />
+            <input type="number" id="unitPrice" placeholder="Amount (Ksh)" min="0" step="0.01" />
+            <button onclick="addItem()">+ Add Row</button>
+          </div>
+          <div id="addItemError" class="form-error"></div>
         </div>
 
+        <div class="table-wrapper">
         <table id="quotationTable">
           <thead>
             <tr>
               <th>#</th>
-              <th>Item Description</th>
-              <th>Total (Ksh)</th>
+              <th>ITEM DESCRIPTION</th>
+              <th>AMOUNT (KSH)</th>
+              <th class="actions-header">ACTIONS</th>
             </tr>
           </thead>
-          <tbody id="predefinedRows">
-            <!-- Predefined empty rows for spacing or additional rows -->
-          </tbody>
+          <tbody id="predefinedRows"></tbody>
         </table>
+        </div>
 
-        <button onclick="addItem()">Add Item</button>
+        <div class="delivery-notes-section">
+          <div class="delivery-notes-header">NOTES</div>
+          <div class="quick-add">
+            <span class="quick-add-label">Quick add:</span>
+            <button type="button" class="chip chip-green" onclick="addNote('Items have been inspected ✓')">Inspected ✓</button>
+            <button type="button" class="chip chip-yellow" onclick="addNote('Caution: Sharp Edges △')">Sharp Edges △</button>
+            <button type="button" class="chip chip-red" onclick="addNote('Balance payment due on delivery')">Balance Due</button>
+            <button type="button" class="chip chip-darkred" onclick="addNote('No returns accepted')">No Returns</button>
+            <button type="button" class="chip chip-blue" onclick="addNote('Collect within 7 days')">7-Day Pickup</button>
+            <button type="button" class="chip chip-gray" onclick="addNote('Please inspect all joints before signing')">Inspect Joints</button>
+          </div>
+          <textarea id="deliveryNotes" placeholder="Enter delivery notes or special instructions..."></textarea>
+        </div>
       </section>
 
       <footer class="footer">
         <div class="terms">
-          <h3>Terms & Conditions</h3>
-          <p>
-            This Receipt is valid for 30 days from the above mentioned date.
-          </p>
-          <p>
-            Please do not hesitate to contact us should you have any questions.
-          </p>
+          <h3>TERMS &amp; CONDITIONS</h3>
+          <p>This receipt is valid for 30 days from the date above.</p>
+          <p>Please contact us should you have any queries.</p>
           <div class="sign">
-            <p><strong>Prepared BY: ERICK M. OCHIENG:</strong></p>
-            <div class="signed">
-              <p><strong>Signed</strong></p>
-              <div class="dot">
-                <img src="./assets/Picture.png" alt="" />
-                <p><strong>.........................</strong></p>
+            <p>Prepared by: <strong>ERICK M. OCHIENG</strong></p>
+            <div class="sig-block">
+              <p>Authorised Signature:</p>
+              <div class="sig-line">
+                <img src="./assets/Picture.png" alt="Authorised Signature" class="sig-img" />
+                <span class="dotted-line">.........................</span>
               </div>
             </div>
-            <p><strong>KRA PIN: A004195051M</strong></p>
           </div>
         </div>
         <div class="quotation-total">
-          <p><strong>SUBTOTAL:</strong> <span id="subtotal">0.00</span></p>
-          <p><strong>TAX @ 0%:</strong> <span id="subtotal">0.00</span></p>
-          <p class="grand">
-            <strong>TOTAL:</strong> <span id="grandTotal">0.00</span>
-          </p>
+          <div class="total-row">
+            <span>Subtotal:</span>
+            <span>Ksh <span id="subtotal">0.00</span></span>
+          </div>
+          <div class="total-row">
+            <span>Tax @ <input type="number" id="taxRate" value="0" min="0" max="100" step="0.5" class="tax-rate-input" />%:</span>
+            <span>Ksh <span id="taxAmount">0.00</span></span>
+          </div>
+          <div class="total-row">
+            <span>Amount Paid:</span>
+            <span>Ksh <input type="number" id="amountPaid" value="0" min="0" step="0.01" class="amount-paid-input" /></span>
+          </div>
+          <div class="total-row grand-total">
+            <span><strong>Balance Due:</strong></span>
+            <span><strong>Ksh <span id="grandTotal">0.00</span></strong></span>
+          </div>
         </div>
       </footer>
+
     </div>
 
-    <button id="downloadBtn" onclick="downloadQuotation()">
-      Download Invoice as PDF
-    </button>
-    <button id="downloadBtn" onclick="downloadWordQuotation()">
-      Download as Word
-    </button>
+    <div class="download-section">
+      <button id="paidToggleBtn" class="btn-paid-toggle" onclick="togglePaid()">Mark as PAID</button>
+      <button onclick="downloadQuotation()">Download as PDF</button>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

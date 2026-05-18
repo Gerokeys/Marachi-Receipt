@@ -57,7 +57,7 @@ body {
 }
 
 .logo p {
-  font-size: 0.82em;
+  font-size: 0.95em;
   font-weight: 700;
   color: #cd0e3d;
   margin-top: 5px;
@@ -66,12 +66,12 @@ body {
 
 /* ── Dealers strip ── */
 .dealers {
-  border-top: 2px solid #cd0e3d;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 11.5px;
+  border-top: 2px solid #1a1a1a;
+  border-bottom: 2px solid #cd0e3d;
+  font-size: 13px;
   text-align: center;
-  padding: 7px 16px;
-  color: #555;
+  padding: 8px 16px;
+  color: #444;
   margin-bottom: 2px;
   line-height: 1.5;
 }
@@ -80,11 +80,11 @@ body {
 .word {
   text-align: center;
   padding: 14px 20px 12px;
-  font-size: 21px;
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: 9px;
+  letter-spacing: 12px;
   text-transform: uppercase;
-  border-bottom: 1.5px solid #222;
+  border-bottom: 2px solid #1a1a1a;
   margin-bottom: 18px;
   color: #1a1a1a;
 }
@@ -92,23 +92,24 @@ body {
 /* ── Details box ── */
 .quotation-details {
   display: flex;
-  justify-content: space-between;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
-  padding: 16px 18px;
+  padding: 0;
   margin-bottom: 18px;
-  gap: 20px;
+  gap: 0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-.details-left {
+.details-col {
   flex: 1;
+  padding: 16px 18px;
+  border-right: 1px solid #e8e8e8;
 }
 
 .details-right {
-  min-width: 215px;
-  border-left: 1px solid #e8e8e8;
-  padding-left: 20px;
+  min-width: 210px;
+  padding: 16px 18px;
   font-size: 13px;
   line-height: 1.85;
 }
@@ -279,7 +280,7 @@ body {
 }
 
 #quotationTable thead tr {
-  background-color: #1a1a1a;
+  background-color: #8b0000;
   color: white;
 }
 
@@ -677,15 +678,29 @@ body {
   /* Details box stacks */
   .quotation-details {
     flex-direction: column;
-    gap: 14px;
+  }
+
+  .details-col {
+    border-right: none;
+    border-bottom: 1px solid #e8e8e8;
   }
 
   .details-right {
-    border-left: none;
-    border-top: 1px solid #e8e8e8;
-    padding-left: 0;
-    padding-top: 14px;
     min-width: unset;
+  }
+
+  /* General font boost */
+  .details-row,
+  .detail-label,
+  .details-right,
+  .details-right p,
+  .section-label,
+  .from-label,
+  .terms p,
+  .sign p,
+  .sig-block p,
+  .total-row {
+    font-size: 15px;
   }
 
   /* Form stacks */
@@ -697,16 +712,14 @@ body {
   .form-row input {
     width: 100%;
     flex: none;
-  }
-
-  .form-row input[id="quantity"] {
-    max-width: 100%;
-    flex: none;
+    font-size: 16px;
+    padding: 11px 12px;
   }
 
   .form-row button {
     width: 100%;
-    padding: 10px;
+    padding: 13px;
+    font-size: 16px;
     text-align: center;
   }
 
@@ -717,13 +730,30 @@ body {
 
   #quotationTable th,
   #quotationTable td {
-    padding: 7px 8px;
-    font-size: 12px;
+    padding: 10px 10px;
+    font-size: 15px;
   }
 
-  /* Delivery notes chips wrap */
-  .quick-add {
-    gap: 6px;
+  /* Action buttons — stacked and finger-friendly */
+  .actions-cell {
+    white-space: normal;
+    min-width: 90px;
+  }
+
+  .btn-edit,
+  .btn-save,
+  .btn-delete {
+    display: block;
+    width: 100%;
+    padding: 9px 0;
+    font-size: 13px;
+    margin-right: 0;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .btn-delete {
+    margin-bottom: 0;
   }
 
   /* Footer stacks */
@@ -752,8 +782,8 @@ body {
   }
 
   .word {
-    font-size: 17px;
-    letter-spacing: 6px;
+    font-size: 22px;
+    letter-spacing: 8px;
   }
 }
 
@@ -784,8 +814,8 @@ body {
   }
 
   .word {
-    font-size: 15px;
-    letter-spacing: 5px;
+    font-size: 20px;
+    letter-spacing: 6px;
     padding: 10px 0;
   }
 
@@ -796,15 +826,14 @@ body {
 
   #quotationTable th,
   #quotationTable td {
-    font-size: 11px;
-    padding: 6px 7px;
+    font-size: 14px;
+    padding: 9px 8px;
   }
 
   .btn-edit,
   .btn-save,
   .btn-delete {
-    padding: 4px 7px;
-    font-size: 11px;
-    margin-right: 2px;
+    padding: 8px 0;
+    font-size: 13px;
   }
 }

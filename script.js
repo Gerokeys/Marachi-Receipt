@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     month: "long",
     year: "numeric",
   });
-  dateElement.textContent = formattedDate;
+  dateElement.value = formattedDate;
 
   function fmt(n) {
     return n.toLocaleString("en-KE", {
@@ -43,42 +43,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addItem = function () {
     const descInput = document.getElementById("description");
-    const measInput = document.getElementById("measurements");
-    const qtyInput = document.getElementById("quantity");
     const priceInput = document.getElementById("unitPrice");
     const errorEl = document.getElementById("addItemError");
 
     const description = descInput.value.trim();
-    const measurements = measInput.value.trim();
-    const qty = parseInt(qtyInput.value);
-    const unitPrice = parseFloat(priceInput.value);
+    const amount = parseFloat(priceInput.value);
 
-    [descInput, qtyInput, priceInput].forEach(el => el.classList.remove("input-error"));
+    [descInput, priceInput].forEach(el => el.classList.remove("input-error"));
     errorEl.textContent = "";
 
     const errors = [];
     if (!description) { descInput.classList.add("input-error"); errors.push("description"); }
-    if (isNaN(qty) || qty <= 0) { qtyInput.classList.add("input-error"); errors.push("quantity"); }
-    if (isNaN(unitPrice) || unitPrice < 0) { priceInput.classList.add("input-error"); errors.push("unit price"); }
+    if (isNaN(amount) || amount < 0) { priceInput.classList.add("input-error"); errors.push("amount"); }
 
     if (errors.length) {
       errorEl.textContent = `Please enter a valid ${errors.join(", ")}.`;
       return;
     }
 
-    const total = qty * unitPrice;
-    subtotal += total;
+    subtotal += amount;
     itemCount++;
 
     const row = document.createElement("tr");
-    row.dataset.rowTotal = total;
+    row.dataset.rowTotal = amount;
     row.innerHTML = `
       <td>${itemCount}</td>
       <td>${description}</td>
-      <td>${measurements || "-"}</td>
-      <td>${qty}</td>
-      <td>${fmt(unitPrice)}</td>
-      <td>${fmt(total)}</td>
+      <td>${fmt(amount)}</td>
       <td class="actions-cell">
         <button class="btn-edit" onclick="editRow(this)">Edit</button>
         <button class="btn-delete" onclick="deleteRow(this)">Delete</button>
@@ -89,8 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateTotals();
 
     descInput.value = "";
-    measInput.value = "";
-    qtyInput.value = "";
     priceInput.value = "";
   };
 
@@ -100,43 +89,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (btn.textContent === "Edit") {
       const desc = cells[1].textContent;
-      const meas = cells[2].textContent === "-" ? "" : cells[2].textContent;
-      const qty = cells[3].textContent;
-      const unitPriceRaw = cells[4].textContent.replace(/,/g, "");
+      const amountRaw = cells[2].textContent.replace(/,/g, "");
 
       cells[1].innerHTML = `<input type="text" value="${desc}" class="edit-input">`;
-      cells[2].innerHTML = `<input type="text" value="${meas}" class="edit-input" placeholder="Measurements">`;
-      cells[3].innerHTML = `<input type="number" value="${qty}" class="edit-input" min="1" style="width:60px">`;
-      cells[4].innerHTML = `<input type="number" value="${unitPriceRaw}" class="edit-input" min="0" step="0.01" style="width:100px">`;
-      cells[5].innerHTML = `<span class="live-total">${cells[5].textContent}</span>`;
-
-      const updateLiveTotal = () => {
-        const q = parseFloat(cells[3].querySelector("input").value) || 0;
-        const p = parseFloat(cells[4].querySelector("input").value) || 0;
-        cells[5].querySelector(".live-total").textContent = fmt(q * p);
-      };
-
-      cells[3].querySelector("input").addEventListener("input", updateLiveTotal);
-      cells[4].querySelector("input").addEventListener("input", updateLiveTotal);
+      cells[2].innerHTML = `<input type="number" value="${amountRaw}" class="edit-input" min="0" step="0.01" style="width:110px">`;
 
       btn.textContent = "Save";
       btn.className = "btn-save";
     } else {
       const desc = cells[1].querySelector("input").value.trim() || "-";
-      const meas = cells[2].querySelector("input").value.trim() || "-";
-      const qty = parseInt(cells[3].querySelector("input").value) || 0;
-      const unitPrice = parseFloat(cells[4].querySelector("input").value) || 0;
-      const total = qty * unitPrice;
+      const amount = parseFloat(cells[2].querySelector("input").value) || 0;
       const oldTotal = parseFloat(row.dataset.rowTotal || 0);
 
       cells[1].textContent = desc;
-      cells[2].textContent = meas;
-      cells[3].textContent = qty;
-      cells[4].textContent = fmt(unitPrice);
-      cells[5].textContent = fmt(total);
+      cells[2].textContent = fmt(amount);
 
-      subtotal = subtotal - oldTotal + total;
-      row.dataset.rowTotal = total;
+      subtotal = subtotal - oldTotal + amount;
+      row.dataset.rowTotal = amount;
       updateTotals();
 
       btn.textContent = "Edit";
@@ -154,45 +123,38 @@ document.addEventListener("DOMContentLoaded", function () {
     renumberRows();
   };
 
-  window.addNote = function (text) {
-    const notesArea = document.getElementById("deliveryNotes");
-    const current = notesArea.value.trim();
-    notesArea.value = current ? current + "\n• " + text : "• " + text;
-  };
-
   window.downloadQuotation = function () {
     const element = document.getElementById("quotationContent");
     const addItemSection = document.querySelector(".add-item-section");
-    const quickAdd = document.querySelector(".quick-add");
     const actionHeaders = document.querySelectorAll(".actions-header");
     const actionCells = document.querySelectorAll(".actions-cell");
-    const notesSection = document.querySelector(".delivery-notes-section");
-    const notesEmpty = !document.getElementById("deliveryNotes").value.trim();
 
     addItemSection.style.display = "none";
-    if (quickAdd) quickAdd.style.display = "none";
-    if (notesEmpty && notesSection) notesSection.style.display = "none";
     actionHeaders.forEach((el) => (el.style.display = "none"));
     actionCells.forEach((el) => (el.style.display = "none"));
     element.classList.add("pdf-generating");
 
-    const receiptNo = document.getElementById("invoiceNumber").value || "Receipt";
+    const usableWidthMm = 198;
+    const contentHmm = Math.ceil((element.scrollHeight / (element.offsetWidth || 1060)) * usableWidthMm) + 10;
+    const pageHeightMm = Math.min(contentHmm, 297);
+
+    const fileName = document.getElementById("projectDesc").value.trim()
+      || document.getElementById("invoiceNumber").value.trim()
+      || "Receipt";
 
     html2pdf()
       .from(element)
       .set({
         margin: [5, 6, 5, 6],
-        filename: `${receiptNo}_Marachi.pdf`,
+        filename: `${fileName}_Marachi.pdf`,
         image: { type: "jpeg", quality: 0.96 },
         html2canvas: { scale: 1.6, useCORS: true },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        jsPDF: { unit: "mm", format: [210, pageHeightMm], orientation: "portrait" },
         pagebreak: { mode: ["avoid-all", "css"] },
       })
       .save()
       .then(() => {
         addItemSection.style.display = "";
-        if (quickAdd) quickAdd.style.display = "";
-        if (notesEmpty && notesSection) notesSection.style.display = "";
         actionHeaders.forEach((el) => (el.style.display = ""));
         actionCells.forEach((el) => (el.style.display = ""));
         element.classList.remove("pdf-generating");

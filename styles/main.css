@@ -682,7 +682,7 @@ body {
 .pdf-generating .quotation-header .name { max-width: 55% !important; }
 .pdf-generating .logo img { width: 88px !important; height: 88px !important; }
 .pdf-generating .logo p { font-size: 0.95em !important; }
-.pdf-generating .dealers { font-size: 13px !important; padding: 8px 16px !important; }
+.pdf-generating .dealers { font-size: 10px !important; padding: 8px 16px !important; }
 .pdf-generating .word { font-size: 22px !important; letter-spacing: 9px !important; padding: 12px 20px !important; }
 
 .pdf-generating .quotation-details { flex-direction: row !important; gap: 0 !important; }

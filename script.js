@@ -26,12 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const taxRate = parseFloat(document.getElementById("taxRate").value) || 0;
     const taxAmt = subtotal * taxRate / 100;
     const total = subtotal + taxAmt;
-    const amountPaid = parseFloat(document.getElementById("amountPaid").value) || 0;
-    const balanceDue = Math.max(0, total - amountPaid);
 
     subtotalEl.textContent = fmt(subtotal);
     document.getElementById("taxAmount").textContent = fmt(taxAmt);
-    grandTotalEl.textContent = fmt(balanceDue);
+    grandTotalEl.textContent = fmt(total);
   }
 
   function renumberRows() {
@@ -134,10 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     actionCells.forEach((el) => (el.style.display = "none"));
     element.classList.add("pdf-generating");
 
-    const usableWidthMm = 198;
-    const contentHmm = Math.ceil((element.scrollHeight / (element.offsetWidth || 1060)) * usableWidthMm) + 10;
-    const pageHeightMm = Math.min(contentHmm, 297);
-
     const fileName = document.getElementById("projectDesc").value.trim()
       || document.getElementById("invoiceNumber").value.trim()
       || "Receipt";
@@ -148,8 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
         margin: [5, 6, 5, 6],
         filename: `${fileName}_Marachi.pdf`,
         image: { type: "jpeg", quality: 0.96 },
-        html2canvas: { scale: 1.6, useCORS: true },
-        jsPDF: { unit: "mm", format: [210, pageHeightMm], orientation: "portrait" },
+        html2canvas: { scale: 1.6, useCORS: true, windowWidth: 1200 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         pagebreak: { mode: ["avoid-all", "css"] },
       })
       .save()
@@ -169,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   document.getElementById("taxRate").addEventListener("input", updateTotals);
-  document.getElementById("amountPaid").addEventListener("input", updateTotals);
+  document.getElementById("taxRate").addEventListener("change", updateTotals);
 
   updateTotals();
 });

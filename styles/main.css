@@ -25,6 +25,9 @@ body {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 1536px;
 }
 
 /* ── Header ── */
@@ -79,14 +82,14 @@ body {
 /* ── Title ── */
 .word {
   text-align: center;
-  padding: 14px 20px 12px;
-  font-size: 28px;
+  padding: 12px 20px;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: 12px;
+  letter-spacing: 9px;
   text-transform: uppercase;
-  border-bottom: 2px solid #1a1a1a;
+  background-color: #8b0000;
+  color: white;
   margin-bottom: 18px;
-  color: #1a1a1a;
 }
 
 /* ── Details box ── */
@@ -249,6 +252,11 @@ body {
 
 .form-row button:active {
   transform: scale(0.97);
+}
+
+/* ── Table section grows to push footer down ── */
+.quotation-table {
+  flex: 1;
 }
 
 /* ── Table wrapper (mobile scroll) ── */
@@ -444,7 +452,7 @@ body {
 .footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   margin-top: 44px;
   padding-top: 18px;
   border-top: 1.5px solid #ddd;
@@ -488,8 +496,9 @@ body {
 
 .sig-line {
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .sig-img {
@@ -533,9 +542,75 @@ body {
 }
 
 .grand-total {
-  background-color: #1a1a1a;
+  background-color: #8b0000;
   color: white;
   padding: 10px 14px;
+}
+
+/* ── Details column label & inputs ── */
+.col-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.details-col input {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #999;
+  outline: none;
+  font-size: 13px;
+  padding: 4px 0;
+  background: transparent;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.details-col input:focus {
+  border-bottom-color: #8b0000;
+}
+
+/* ── Client Details section ── */
+.client-details {
+  margin-bottom: 18px;
+}
+
+.client-details-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 6px;
+}
+
+.client-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.client-row input {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid #aaa;
+  outline: none;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 2px 4px;
+  background: transparent;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.client-row input:focus {
+  border-bottom-color: #8b0000;
 }
 
 /* ── PAID stamp ── */
@@ -782,8 +857,8 @@ body {
   }
 
   .word {
-    font-size: 22px;
-    letter-spacing: 8px;
+    font-size: 18px;
+    letter-spacing: 7px;
   }
 }
 
@@ -814,9 +889,9 @@ body {
   }
 
   .word {
-    font-size: 20px;
-    letter-spacing: 6px;
-    padding: 10px 0;
+    font-size: 16px;
+    letter-spacing: 5px;
+    padding: 10px 20px;
   }
 
   .chip {

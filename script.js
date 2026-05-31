@@ -131,9 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
     actionHeaders.forEach((el) => (el.style.display = "none"));
     actionCells.forEach((el) => (el.style.display = "none"));
     element.classList.add("pdf-generating");
-    element.style.width = "1060px";
-    element.style.maxWidth = "1060px";
-    element.style.margin = "0";
 
     const fileName = document.getElementById("projectDesc").value.trim()
       || document.getElementById("invoiceNumber").value.trim()
@@ -144,8 +141,19 @@ document.addEventListener("DOMContentLoaded", function () {
       .set({
         margin: [5, 6, 5, 6],
         filename: `${fileName}_Marachi.pdf`,
-        image: { type: "jpeg", quality: 0.96 },
-        html2canvas: { scale: 1.6, useCORS: true, windowWidth: 1200 },
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+          scale: 1.6,
+          useCORS: true,
+          windowWidth: 1200,
+          onclone: function (clonedDoc) {
+            const el = clonedDoc.getElementById("quotationContent");
+            el.style.width = "1060px";
+            el.style.maxWidth = "1060px";
+            el.style.margin = "0";
+            el.style.minHeight = "1536px";
+          }
+        },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         pagebreak: { mode: ["avoid-all", "css"] },
       })
@@ -155,9 +163,6 @@ document.addEventListener("DOMContentLoaded", function () {
         actionHeaders.forEach((el) => (el.style.display = ""));
         actionCells.forEach((el) => (el.style.display = ""));
         element.classList.remove("pdf-generating");
-        element.style.width = "";
-        element.style.maxWidth = "";
-        element.style.margin = "";
       });
   };
 

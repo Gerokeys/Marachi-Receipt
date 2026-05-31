@@ -254,9 +254,10 @@ body {
   transform: scale(0.97);
 }
 
-/* ── Table section grows to push footer down ── */
-.quotation-table {
+/* ── Spacer grows to push footer to bottom of A4 ── */
+.page-spacer {
   flex: 1;
+  min-height: 20px;
 }
 
 /* ── Table wrapper (mobile scroll) ── */

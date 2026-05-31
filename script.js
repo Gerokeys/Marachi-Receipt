@@ -131,6 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
     actionHeaders.forEach((el) => (el.style.display = "none"));
     actionCells.forEach((el) => (el.style.display = "none"));
     element.classList.add("pdf-generating");
+    element.style.width = "1060px";
+    element.style.maxWidth = "1060px";
+    element.style.margin = "0";
 
     const fileName = document.getElementById("projectDesc").value.trim()
       || document.getElementById("invoiceNumber").value.trim()
@@ -152,6 +155,9 @@ document.addEventListener("DOMContentLoaded", function () {
         actionHeaders.forEach((el) => (el.style.display = ""));
         actionCells.forEach((el) => (el.style.display = ""));
         element.classList.remove("pdf-generating");
+        element.style.width = "";
+        element.style.maxWidth = "";
+        element.style.margin = "";
       });
   };
 
